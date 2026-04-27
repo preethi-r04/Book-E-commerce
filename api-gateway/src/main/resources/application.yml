@@ -36,6 +36,11 @@ spring:
           predicates:
             - Path=/cart/**
 
+        - id: wishlist-service
+          uri: http://localhost:8086
+          predicates:
+            - Path=/wishlist/**
+
 eureka:
   client:
     service-url:
