@@ -3,12 +3,12 @@ package com.bridgelabz.order_service.service;
 import com.bridgelabz.order_service.entity.Order;
 import com.bridgelabz.order_service.repository.OrderRepository;
 import com.bridgelabz.order_service.client.BookClient;
+import com.bridgelabz.order_service.dto.BookDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class OrderService {
@@ -19,20 +19,20 @@ public class OrderService {
     @Autowired
     private BookClient bookClient;
 
+    // ✅ Save Order
     public Order save(Order order) {
 
         try {
-            List<Map<String, Object>> books = bookClient.getBooks();
-
+            Object books = bookClient.getBooks();   // ✅ FIXED
             System.out.println("Books fetched: " + books);
 
         } catch (Exception e) {
-            e.printStackTrace();   // 🔥 WILL SHOW REAL ERROR
+            System.out.println("Error calling Book Service: " + e.getMessage());
         }
 
         return repo.save(order);
     }
-
+    // ✅ Get all orders
     public List<Order> getAll() {
         return repo.findAll();
     }
